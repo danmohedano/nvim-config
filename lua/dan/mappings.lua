@@ -19,8 +19,7 @@ local sections = {
 
 if not vim.g.icons_enabled then vim.tbl_map(function(opts) opts.name = opts.name:gsub("^.* ", "") end, sections) end
 
--- NORMAL --
--- Standard Operations
+-- MOVEMENT BINDINGS --
 if KEYBOARD_LAYOUT == "es" then
     -- Update movement keymaps for spanish keyboard layout
     -- Translates hjkl to jklñ
@@ -46,7 +45,7 @@ if KEYBOARD_LAYOUT == "es" then
     maps.n["<C-j>"] = { "<C-w>h" , desc = "Focus Left Window"}
     maps.n["<C-k>"] = { "<C-w>j", desc = "Focus Down Window"}
     maps.n["<C-l>"] = { "<C-w>k", desc = "Focus Up Window" }
-    maps.n["<C-Q>"] = { "<C-w>l", desc = "Focus Right Window" }
+    maps.n[";"] = { "<C-w>l", desc = "Focus Right Window" }  -- For some reason <C-ñ> is mapped to ";", not sure if it has something to do with spanish layout or what
 else
     -- Regular US keyboard layout
     maps.n["k"] = { "v:count ? 'j' : 'gj'", expr = true, desc = "Move cursor down" }
@@ -55,34 +54,46 @@ else
     maps.v["l"] = maps.n.l
 end
 
+-- INSERT BINDINGS --
+maps.i["lk"] = { "<Esc>" }
+
+-- LEADER BINDINGS --
 maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save" }
 maps.n["<leader>q"] = { "<cmd>confirm q<cr>", desc = "Quit" }
 maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" }
---maps.n["gx"] = { utils.system_open, desc = "Open the file under cursor with system app" }
 maps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Force write" }
---maps.n["<C-q>"] = { "<cmd>q!<cr>", desc = "Force quit" }
-maps.n["|"] = { "<cmd>vsplit<cr>", desc = "Vertical Split" }
-maps.n["\\"] = { "<cmd>split<cr>", desc = "Horizontal Split" }
-
 if vim.fn.has("unix") then
     -- Create executable
     maps.n["<leader>x"] = { "<cmd>!chmod +x %<CR>", desc = "Turn file into executable" }
 end
 
--- Resizing
-maps.n["<C-Plus>"] = { "<cmd>resize -2<CR>"}
-maps.n["<C-Minus>"] = { "<cmd>resize +2<CR>"}
-maps.n["<C-Left>"] = { "<cmd>vertical -2<CR>"}
-maps.n["<C-Right>"] = { "<cmd>vertical -2<CR>"}
+--maps.n["gx"] = { utils.system_open, desc = "Open the file under cursor with system app" }
+--maps.n["<C-q>"] = { "<cmd>q!<cr>", desc = "Force quit" }
 
--- Move text
+-- SPLITTING BINDINGS --
+maps.n["|"] = { "<cmd>vsplit<cr>", desc = "Vertical Split" }
+maps.n["\\"] = { "<cmd>split<cr>", desc = "Horizontal Split" }
+
+-- RESIZING BINDINGS --
+maps.n["<C-Plus>"] = { "<cmd>resize -1<CR>"}
+maps.n["<C-Minus>"] = { "<cmd>resize +1<CR>"}
+maps.n["<C-Left>"] = { "<cmd>vertical resize -5<CR>"}
+maps.n["<C-Right>"] = { "<cmd>vertical resize +5<CR>"}
+maps.n["<C-Up>"] = { "<cmd>horizontal resize +5<CR>"}
+maps.n["<C-Down>"] = { "<cmd>horizontal resize -5<CR>"}
+
+-- SELECTION BINDINGS --
 maps.v["<A-k>"] = { "<cmd>m .+1<CR>gv" }
 maps.v["<A-l>"] = { "<cmd>m .-2<CR>gv" }
+-- Stay in indent mode
+maps.v["<S-Tab>"] = { "<gv", desc = "unindent line" }
+maps.v["<Tab>"] = { ">gv", desc = "indent line" }
 
--- Hold onto yanked content when pasting in visual mode
-maps.v["p"] =  { '"_dP' }
 
--- Plugin Manager
+-- COPY/PASTE BINDINGS --
+maps.v["p"] =  { '"_dP' } -- Hold onto yanked content when pasting in visual mode
+
+-- PLUGIN MANAGER --
 maps.n["<leader>p"] = sections.p
 maps.n["<leader>pi"] = { function() require("lazy").install() end, desc = "Plugins Install" }
 maps.n["<leader>ps"] = { function() require("lazy").home() end, desc = "Plugins Status" }
@@ -90,11 +101,14 @@ maps.n["<leader>pS"] = { function() require("lazy").sync() end, desc = "Plugins 
 maps.n["<leader>pu"] = { function() require("lazy").check() end, desc = "Plugins Check Updates" }
 maps.n["<leader>pU"] = { function() require("lazy").update() end, desc = "Plugins Update" }
 
--- Navigate tabs
+-- TAB BINDINGS --
 maps.n["]t"] = { function() vim.cmd.tabnext() end, desc = "Next tab" }
 maps.n["[t"] = { function() vim.cmd.tabprevious() end, desc = "Previous tab" }
 
--- Alpha
+--=================--
+-- PLUGIN BINDINGS --
+--=================--
+-- ALPHA - NVIM GREETER --
 if is_available "alpha-nvim" then
     maps.n["<leader>h"] = {
         function()
@@ -108,7 +122,7 @@ if is_available "alpha-nvim" then
     }
 end
 
--- Comment
+-- COMMENT --
 if is_available "Comment.nvim" then
     maps.n["<leader>/"] = {
         function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end,
@@ -118,7 +132,7 @@ if is_available "Comment.nvim" then
         { "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", desc = "Toggle comment line" }
 end
 
--- NeoTree
+-- NEOTREE - FILE EXPLORER --
 if is_available "neo-tree.nvim" then
     maps.n["<leader>e"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
     maps.n["<leader>o"] = {
@@ -133,13 +147,13 @@ if is_available "neo-tree.nvim" then
     }
 end
 
--- Package Manager
+-- MASON PACKAGE MANAGER --
 if is_available "mason.nvim" then
     maps.n["<leader>pm"] = { "<cmd>Mason<cr>", desc = "Mason Installer" }
     maps.n["<leader>pM"] = { "<cmd>MasonUpdateAll<cr>", desc = "Mason Update" }
 end
 
--- Terminal
+-- TOGGLETERM - TERMINALS IN NVIM --
 if is_available "toggleterm.nvim" then
     maps.n["<leader>t"] = sections.t
     if vim.fn.executable "lazygit" == 1 then
@@ -167,7 +181,7 @@ if is_available "toggleterm.nvim" then
     maps.t["<C-'>"] = maps.n["<F7>"]
 end
 
--- Improved Code Folding
+-- UFO - IMPROVED CODE FOLDING --
 if is_available "nvim-ufo" then
     maps.n["zR"] = { function() require("ufo").openAllFolds() end, desc = "Open all folds" }
     maps.n["zM"] = { function() require("ufo").closeAllFolds() end, desc = "Close all folds" }
@@ -175,12 +189,5 @@ if is_available "nvim-ufo" then
     maps.n["zm"] = { function() require("ufo").closeFoldsWith() end, desc = "Fold more" }
     maps.n["zp"] = { function() require("ufo").peekFoldedLinesUnderCursor() end, desc = "Peek fold" }
 end
-
--- Stay in indent mode
-maps.v["<S-Tab>"] = { "<gv", desc = "unindent line" }
-maps.v["<Tab>"] = { ">gv", desc = "indent line" }
-
--- INSERT --
-maps.i["lk"] = { "<Esc>" }
 
 utils.set_mappings(maps)
