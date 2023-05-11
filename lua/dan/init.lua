@@ -1,6 +1,6 @@
 for _, source in ipairs {
     "dan.options",
-    --"dan.lazy",
+    "dan.lazy",
     "dan.mappings",
 } do
     local status_ok, fault = pcall(require, source)
