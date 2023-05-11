@@ -55,7 +55,7 @@ else
 end
 
 -- INSERT BINDINGS --
-maps.i["lk"] = { "<Esc>" }
+maps.i["kj"] = { "<Esc>" }
 
 -- LEADER BINDINGS --
 maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save" }
