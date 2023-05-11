@@ -61,6 +61,7 @@ maps.i["kj"] = { "<Esc>" }
 maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save" }
 maps.n["<leader>q"] = { "<cmd>confirm q<cr>", desc = "Quit" }
 maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" }
+maps.n["<leader>c"] = { "<cmd>noh<cr>", desc = "Clear search highlight until next one" } 
 maps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Force write" }
 if vim.fn.has("unix") then
     -- Create executable
@@ -88,7 +89,6 @@ maps.v["<A-l>"] = { "<cmd>m .-2<CR>gv" }
 -- Stay in indent mode
 maps.v["<S-Tab>"] = { "<gv", desc = "unindent line" }
 maps.v["<Tab>"] = { ">gv", desc = "indent line" }
-
 
 -- COPY/PASTE BINDINGS --
 maps.v["p"] =  { '"_dP' } -- Hold onto yanked content when pasting in visual mode
