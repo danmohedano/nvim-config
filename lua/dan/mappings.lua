@@ -47,6 +47,10 @@ end
 -- SPLITTING BINDINGS --
 maps.n["|"] = { "<cmd>vsplit<cr>", desc = "Vertical Split" }
 maps.n["\\"] = { "<cmd>split<cr>", desc = "Horizontal Split" }
+maps.n["<leader>tk"] = { "<C-w>K", desc = "Move to Top" }
+maps.n["<leader>tj"] = { "<C-w>J", desc = "Move to Bottom" }
+maps.n["<leader>tl"] = { "<C-w>L", desc = "Move to Right" }
+maps.n["<leader>th"] = { "<C-w>H", desc = "Move to Left" }
 
 -- RESIZING BINDINGS --
 maps.n["<C-Plus>"] = { "<cmd>resize -1<CR>"}
@@ -62,6 +66,8 @@ maps.v["<A-l>"] = { "<cmd>m .-2<CR>gv" }
 -- Stay in indent mode
 maps.v["<S-Tab>"] = { "<gv", desc = "unindent line" }
 maps.v["<Tab>"] = { ">gv", desc = "indent line" }
+maps.v["<"] = { "<gv", desc = "unindent line" }
+maps.v[">"] = { ">gv", desc = "indent line" }
 
 -- COPY/PASTE BINDINGS --
 maps.v["p"] =  { '"_dP' } -- Hold onto yanked content when pasting in visual mode
