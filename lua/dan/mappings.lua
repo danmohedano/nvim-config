@@ -1,8 +1,6 @@
 local utils = require "dan.utils"
 local is_available = utils.is_available
 
-local KEYBOARD_LAYOUT = "es"
-
 local maps = { i = {}, n = {}, v = {}, t = {} }
 
 local sections = {
@@ -20,39 +18,11 @@ local sections = {
 if not vim.g.icons_enabled then vim.tbl_map(function(opts) opts.name = opts.name:gsub("^.* ", "") end, sections) end
 
 -- MOVEMENT BINDINGS --
-if KEYBOARD_LAYOUT == "es" then
-    -- Update movement keymaps for spanish keyboard layout
-    -- Translates hjkl to jklñ
-    -- Normal mode movement
-    maps.n["k"] = { "v:count ? 'j' : 'gj'", expr = true, desc = "Move cursor down" }
-    maps.n["l"] = { "v:count ? 'k' : 'gk'", expr = true, desc = "Move cursor up" }
-    maps.n["j"] = { "h" }
-    maps.n["ñ"] = { "l" }
-
-    -- Visual mode movement
-    maps.v["k"] = maps.n.k
-    maps.v["l"] = maps.n.l
-    maps.v["j"] = maps.n.j
-    maps.v["ñ"] = maps.n["ñ"]
-
-    -- Delete movement
-    maps.n["dj"] = { "dh" }
-    maps.n["dk"] = { "dj" }
-    maps.n["dl"] = { "dk" }
-    maps.n["dñ"] = { "dl" }
-
-    -- Window navigation
-    maps.n["<C-j>"] = { "<C-w>h" , desc = "Focus Left Window"}
-    maps.n["<C-k>"] = { "<C-w>j", desc = "Focus Down Window"}
-    maps.n["<C-l>"] = { "<C-w>k", desc = "Focus Up Window" }
-    maps.n[";"] = { "<C-w>l", desc = "Focus Right Window" }  -- For some reason <C-ñ> is mapped to ";", not sure if it has something to do with spanish layout or what
-else
-    -- Regular US keyboard layout
-    maps.n["k"] = { "v:count ? 'j' : 'gj'", expr = true, desc = "Move cursor down" }
-    maps.n["l"] = { "v:count ? 'k' : 'gk'", expr = true, desc = "Move cursor up" }
-    maps.v["k"] = maps.n.k
-    maps.v["l"] = maps.n.l
-end
+-- Regular US keyboard layout
+maps.n["j"] = { "v:count ? 'j' : 'gj'", expr = true, desc = "Move cursor down" }
+maps.n["k"] = { "v:count ? 'k' : 'gk'", expr = true, desc = "Move cursor up" }
+maps.v["j"] = maps.n.j
+maps.v["k"] = maps.n.k
 
 -- INSERT BINDINGS --
 maps.i["kj"] = { "<Esc>" }
