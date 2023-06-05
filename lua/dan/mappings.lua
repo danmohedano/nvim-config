@@ -18,11 +18,14 @@ local sections = {
 if not vim.g.icons_enabled then vim.tbl_map(function(opts) opts.name = opts.name:gsub("^.* ", "") end, sections) end
 
 -- MOVEMENT BINDINGS --
--- Regular US keyboard layout
 maps.n["j"] = { "v:count ? 'j' : 'gj'", expr = true, desc = "Move cursor down" }
 maps.n["k"] = { "v:count ? 'k' : 'gk'", expr = true, desc = "Move cursor up" }
 maps.v["j"] = maps.n.j
 maps.v["k"] = maps.n.k
+maps.n["<C-h>"] = { "<C-w>h", desc = "Focus Left Window" }
+maps.n["<C-l>"] = { "<C-w>l", desc = "Focus Right Window" }
+maps.n["<C-j>"] = { "<C-w>j", desc = "Focus Down Window" }
+maps.n["<C-k>"] = { "<C-w>k", desc = "Focus Up Window" }
 
 -- INSERT BINDINGS --
 maps.i["kj"] = { "<Esc>" }
@@ -78,20 +81,6 @@ maps.n["[t"] = { function() vim.cmd.tabprevious() end, desc = "Previous tab" }
 --=================--
 -- PLUGIN BINDINGS --
 --=================--
--- ALPHA - NVIM GREETER --
-if is_available "alpha-nvim" then
-    maps.n["<leader>h"] = {
-        function()
-            local wins = vim.api.nvim_tabpage_list_wins(0)
-            if #wins > 1 and vim.api.nvim_get_option_value("filetype", { win = wins[1] }) == "neo-tree" then
-                vim.fn.win_gotoid(wins[2]) -- go to non-neo-tree window to toggle alpha
-            end
-            require("alpha").start(false, require("alpha").default_config)
-        end,
-        desc = "Home Screen",
-    }
-end
-
 -- COMMENT --
 if is_available "Comment.nvim" then
     maps.n["<leader>/"] = {
