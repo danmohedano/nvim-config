@@ -1,7 +1,7 @@
 local utils = require "dan.utils"
 local is_available = utils.is_available
 
-local maps = { i = {}, n = {}, v = {}, t = {} }
+local maps = { i = {}, n = {}, v = {}, t = {}, x = {}}
 
 local sections = {
     f = { name = "󰍉 Find" },
@@ -26,6 +26,13 @@ maps.n["<C-h>"] = { "<C-w>h", desc = "Focus Left Window" }
 maps.n["<C-l>"] = { "<C-w>l", desc = "Focus Right Window" }
 maps.n["<C-j>"] = { "<C-w>j", desc = "Focus Down Window" }
 maps.n["<C-k>"] = { "<C-w>k", desc = "Focus Up Window" }
+maps.n["<C-H>"] = { "<C-w>H", desc = "Move to Left Window" }
+maps.n["<C-L>"] = { "<C-w>L", desc = "Move to Right Window" }
+maps.n["<C-J>"] = { "<C-w>J", desc = "Move to Down Window" }
+maps.n["<C-K>"] = { "<C-w>K", desc = "Move to Up Window" }
+maps.n["J"] = { "mzJ`z", desc = "Append following line to current" }
+maps.n["n"] = { "nzzzv", desc = "Keep cursor in middle when searching" }
+maps.n["N"] = { "Nzzzv", desc = "Keep cursor in middle when searching" }
 
 -- INSERT BINDINGS --
 maps.i["kj"] = { "<Esc>" }
@@ -34,23 +41,12 @@ maps.i["kj"] = { "<Esc>" }
 maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save" }
 maps.n["<leader>q"] = { "<cmd>confirm q<cr>", desc = "Quit" }
 maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" }
-maps.n["<leader>c"] = { "<cmd>noh<cr>", desc = "Clear search highlight until next one" } 
-maps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Force write" }
-if vim.fn.has("unix") then
-    -- Create executable
-    maps.n["<leader>x"] = { "<cmd>!chmod +x %<CR>", desc = "Turn file into executable" }
-end
-
---maps.n["gx"] = { utils.system_open, desc = "Open the file under cursor with system app" }
---maps.n["<C-q>"] = { "<cmd>q!<cr>", desc = "Force quit" }
+maps.n["<leader>x"] = { "<cmd>!chmod +x %<CR>", desc = "Create executable" }
+maps.n["<leader>s"] = { [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], desc = "Substitute" }
 
 -- SPLITTING BINDINGS --
 maps.n["|"] = { "<cmd>vsplit<cr>", desc = "Vertical Split" }
 maps.n["\\"] = { "<cmd>split<cr>", desc = "Horizontal Split" }
-maps.n["<leader>tk"] = { "<C-w>K", desc = "Move to Top" }
-maps.n["<leader>tj"] = { "<C-w>J", desc = "Move to Bottom" }
-maps.n["<leader>tl"] = { "<C-w>L", desc = "Move to Right" }
-maps.n["<leader>th"] = { "<C-w>H", desc = "Move to Left" }
 
 -- RESIZING BINDINGS --
 maps.n["<C-Plus>"] = { "<cmd>resize -1<CR>"}
@@ -61,8 +57,8 @@ maps.n["<C-Up>"] = { "<cmd>horizontal resize +5<CR>"}
 maps.n["<C-Down>"] = { "<cmd>horizontal resize -5<CR>"}
 
 -- SELECTION BINDINGS --
-maps.v["<A-k>"] = { "<cmd>m .+1<CR>gv" }
-maps.v["<A-l>"] = { "<cmd>m .-2<CR>gv" }
+maps.v["J"] = { "<cmd>m '>+1<CR>gv=gv" }
+maps.v["K"] = { "<cmd>m '<-2<CR>gv=gv" }
 -- Stay in indent mode
 maps.v["<S-Tab>"] = { "<gv", desc = "unindent line" }
 maps.v["<Tab>"] = { ">gv", desc = "indent line" }
@@ -70,19 +66,9 @@ maps.v["<"] = { "<gv", desc = "unindent line" }
 maps.v[">"] = { ">gv", desc = "indent line" }
 
 -- COPY/PASTE BINDINGS --
-maps.v["p"] =  { "'_dP" } -- Hold onto yanked content when pasting in visual mode
-
--- PLUGIN MANAGER --
-maps.n["<leader>p"] = sections.p
-maps.n["<leader>pi"] = { function() require("lazy").install() end, desc = "Plugins Install" }
-maps.n["<leader>ps"] = { function() require("lazy").home() end, desc = "Plugins Status" }
-maps.n["<leader>pS"] = { function() require("lazy").sync() end, desc = "Plugins Sync" }
-maps.n["<leader>pu"] = { function() require("lazy").check() end, desc = "Plugins Check Updates" }
-maps.n["<leader>pU"] = { function() require("lazy").update() end, desc = "Plugins Update" }
-
--- TAB BINDINGS --
-maps.n["]t"] = { function() vim.cmd.tabnext() end, desc = "Next tab" }
-maps.n["[t"] = { function() vim.cmd.tabprevious() end, desc = "Previous tab" }
+maps.x["p"] =  { "\"_dP" } -- Hold onto yanked content when pasting in visual mode
+maps.n["<leader>d"] = { "\"_d" }
+maps.v["<leader>d"] = { "\"_d" }
 
 --=================--
 -- PLUGIN BINDINGS --

@@ -3,7 +3,7 @@ local options = {
         backup = false, -- does not create a backup file
         breakindent = true, -- wrap text to match line start
         clipboard = "unnamedplus", -- allows neovim to access the system clipboard
-        cmdheight = 0, -- hide command line unless needed
+        cmdheight = 10, -- hide command line unless needed
         colorcolumn = "80", -- colorcolumn at 80 chars
         completeopt = { "menuone", "noselect" }, -- mostly just for cmp and insert mode completion
         conceallevel = 0, -- so that `` is visible in markdown files
@@ -18,7 +18,7 @@ local options = {
         foldlevelstart = 99, -- start with all code unfolded
         foldcolumn = vim.fn.has "nvim-0.9" == 1 and "1" or nil, -- show foldcolumn in nvim 0.9
         history = 100, -- number of commands to remember in a history table
-        hlsearch = true, -- highlight all matches on previous search pattern
+        hlsearch = false, -- highlight all matches on previous search pattern
         incsearch = true, -- show the search pattern if found as it is being typed 
         ignorecase = true, -- ignore case in search patterns
         infercase = true, -- infer cases in keyword completion
