@@ -6,6 +6,10 @@ return {
     -- Utilities
     'nvim-tree/nvim-tree.lua',
     'ThePrimeagen/harpoon',
+    {
+        'mbbill/undotree',
+        lazy = false,
+    },
 
     -- Telescope
     {

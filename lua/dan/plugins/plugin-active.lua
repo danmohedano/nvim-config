@@ -4,11 +4,11 @@ local plugins = {
     'lazy',
 
     -- Utilities
+    'harpoon',
     'nvim-tree',
+    'telescope',
     'treesitter-context',
     'treesitter',
-    'telescope',
-    'harpoon',
 
     -- Editing
     'autopairs',
