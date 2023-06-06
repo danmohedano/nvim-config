@@ -132,6 +132,11 @@ if is_available "undotree" then
     maps.n["<leader>u"] = { vim.cmd.UndotreeToggle, desc = "Undotree - Toggle" }
 end
 
+-- VIMFUGITIVE --
+if is_available "vim-fugitive" then
+    maps.n["<leader>gs"] = { vim.cmd.Git, desc = "VimFugitive - Git" }
+end
+
 
 -- MASON PACKAGE MANAGER --
 if is_available "mason.nvim" then

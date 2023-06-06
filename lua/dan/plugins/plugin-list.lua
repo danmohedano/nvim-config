@@ -10,6 +10,10 @@ return {
         'mbbill/undotree',
         lazy = false,
     },
+    {
+        'tpope/vim-fugitive',
+        lazy = false,
+    },
 
     -- Telescope
     {
