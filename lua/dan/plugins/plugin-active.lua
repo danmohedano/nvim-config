@@ -7,6 +7,8 @@ local plugins = {
     'nvim-tree',
     'treesitter-context',
     'treesitter',
+    'telescope',
+    'harpoon',
 
     -- Editing
     'autopairs',

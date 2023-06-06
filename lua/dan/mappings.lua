@@ -103,10 +103,28 @@ if is_available "Comment.nvim" then
         { "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", desc = "Toggle comment line" }
 end
 
--- NEOTREE - FILE EXPLORER --
-if is_available "nvim-tree.lua" then
-    maps.n["<leader>e"] = { "<cmd>NvimTreeToggle<cr>", desc = "Toggle Explorer" }
-    maps.n["<leader>o"] = { "<cmd>NvimTreeFocus<cr>", desc = "Toggle Explorer Focus" }
+-- TELESCOPE --
+if is_available "telescope.nvim" then
+    local builtin = require("telescope.builtin")
+
+    maps.n["<leader>ff"] = { builtin.find_files, desc = "Telescope - Find files" }
+    maps.n["<leader>fg"] = { builtin.git_files, desc = "Telescope - Find Git Files" }
+    maps.n["<leader>fs"] = { function()
+        builtin.grep_string({ search = vim.fn.input("Grep > ") })
+    end, desc = "Telescope - Find String in Files" }
+end
+
+-- HARPOON --
+if is_available "harpoon" then
+    local mark = require("harpoon.mark")
+    local ui = require("harpoon.ui") 
+
+    maps.n["<leader>ha"] = { mark.add_file, desc = "Harpoon - Add Mark" }
+    maps.n["<leader>he"] = { ui.toggle_quick_menu, desc = "Harpoon - Quick Menu Toggle" }
+    maps.n["<leader>h1"] = { function() ui.nav_file(1) end, desc = "Harpoon - Navigate to 1" }
+    maps.n["<leader>h2"] = { function() ui.nav_file(2) end, desc = "Harpoon - Navigate to 2" }
+    maps.n["<leader>h3"] = { function() ui.nav_file(3) end, desc = "Harpoon - Navigate to 3" }
+    maps.n["<leader>h4"] = { function() ui.nav_file(4) end, desc = "Harpoon - Navigate to 4" }
 end
 
 -- MASON PACKAGE MANAGER --

@@ -5,6 +5,21 @@ return {
 
     -- Utilities
     'nvim-tree/nvim-tree.lua',
+    'ThePrimeagen/harpoon',
+
+    -- Telescope
+    {
+        'nvim-telescope/telescope.nvim',
+        version = '0.1.1',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+            'BurntSushi/ripgrep',
+        },
+        lazy = true,
+    },
+    
+    -- Treesitter
     {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
