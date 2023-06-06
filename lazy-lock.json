@@ -1,9 +1,0 @@
-{
-  "Comment.nvim": { "branch": "master", "commit": "e1fe53117aab24c378d5e6deaad786789c360123" },
-  "lazy.nvim": { "branch": "main", "commit": "f145e6f42a56306c5536e9efbfe41f7efbec285d" },
-  "nvim-autopairs": { "branch": "master", "commit": "7747bbae60074acf0b9e3a4c13950be7a2dff444" },
-  "nvim-tree.lua": { "branch": "master", "commit": "270c95556cad96d18ca547d86ae65927334b108b" },
-  "nvim-treesitter": { "branch": "master", "commit": "957aefe8148902897aad877e508ae7e747f155fc" },
-  "nvim-web-devicons": { "branch": "master", "commit": "986875b7364095d6535e28bd4aac3a9357e91bbe" },
-  "tokyonight": { "branch": "main", "commit": "161114bd39b990995e08dbf941f6821afbdcd666" }
-}
