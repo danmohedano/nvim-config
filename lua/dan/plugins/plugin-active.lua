@@ -10,6 +10,9 @@ local plugins = {
     'treesitter-context',
     'treesitter',
 
+    -- LSP
+    'lsp',
+
     -- Editing
     'autopairs',
     'comment',
