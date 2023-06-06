@@ -70,7 +70,7 @@ maps.v["<"] = { "<gv", desc = "unindent line" }
 maps.v[">"] = { ">gv", desc = "indent line" }
 
 -- COPY/PASTE BINDINGS --
-maps.v["p"] =  { '"_dP' } -- Hold onto yanked content when pasting in visual mode
+maps.v["p"] =  { "'_dP" } -- Hold onto yanked content when pasting in visual mode
 
 -- PLUGIN MANAGER --
 maps.n["<leader>p"] = sections.p
@@ -87,6 +87,12 @@ maps.n["[t"] = { function() vim.cmd.tabprevious() end, desc = "Previous tab" }
 --=================--
 -- PLUGIN BINDINGS --
 --=================--
+-- NVIMTREE --
+if is_available "nvim-tree.lua" then
+    maps.n["<leader>e"] = { "<cmd>NvimTreeToggle<cr>", desc = "Toggle Explorer" }
+    maps.n["<leader>o"] = { "<cmd>NvimTreeFocus<cr>", desc = "Toggle Explorer Focus" }
+end
+
 -- COMMENT --
 if is_available "Comment.nvim" then
     maps.n["<leader>/"] = {
