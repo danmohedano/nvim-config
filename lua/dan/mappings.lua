@@ -22,14 +22,14 @@ maps.n["j"] = { "v:count ? 'j' : 'gj'", expr = true, desc = "Move cursor down" }
 maps.n["k"] = { "v:count ? 'k' : 'gk'", expr = true, desc = "Move cursor up" }
 maps.v["j"] = maps.n.j
 maps.v["k"] = maps.n.k
-maps.n["<C-h>"] = { "<C-w>h", desc = "Focus Left Window" }
-maps.n["<C-l>"] = { "<C-w>l", desc = "Focus Right Window" }
-maps.n["<C-j>"] = { "<C-w>j", desc = "Focus Down Window" }
-maps.n["<C-k>"] = { "<C-w>k", desc = "Focus Up Window" }
-maps.n["<C-H>"] = { "<C-w>H", desc = "Move to Left Window" }
-maps.n["<C-L>"] = { "<C-w>L", desc = "Move to Right Window" }
-maps.n["<C-J>"] = { "<C-w>J", desc = "Move to Down Window" }
-maps.n["<C-K>"] = { "<C-w>K", desc = "Move to Up Window" }
+-- maps.n["<C-h>"] = { "<C-w>h", desc = "Focus Left Window" }
+-- maps.n["<C-l>"] = { "<C-w>l", desc = "Focus Right Window" }
+-- maps.n["<C-j>"] = { "<C-w>j", desc = "Focus Down Window" }
+-- maps.n["<C-k>"] = { "<C-w>k", desc = "Focus Up Window" }
+-- maps.n["<C-H>"] = { "<C-w>H", desc = "Move to Left Window" }
+-- maps.n["<C-L>"] = { "<C-w>L", desc = "Move to Right Window" }
+-- maps.n["<C-J>"] = { "<C-w>J", desc = "Move to Down Window" }
+-- maps.n["<C-K>"] = { "<C-w>K", desc = "Move to Up Window" }
 maps.n["J"] = { "mzJ`z", desc = "Append following line to current" }
 maps.n["n"] = { "nzzzv", desc = "Keep cursor in middle when searching" }
 maps.n["N"] = { "Nzzzv", desc = "Keep cursor in middle when searching" }
@@ -128,43 +128,6 @@ end
 if is_available "mason.nvim" then
     maps.n["<leader>pm"] = { "<cmd>Mason<cr>", desc = "Mason Installer" }
     maps.n["<leader>pM"] = { "<cmd>MasonUpdateAll<cr>", desc = "Mason Update" }
-end
-
--- TOGGLETERM - TERMINALS IN NVIM --
-if is_available "toggleterm.nvim" then
-    maps.n["<leader>t"] = sections.t
-    if vim.fn.executable "lazygit" == 1 then
-        maps.n["<leader>g"] = sections.g
-        maps.n["<leader>gg"] = { function() utils.toggle_term_cmd "lazygit" end, desc = "ToggleTerm lazygit" }
-        maps.n["<leader>tl"] = { function() utils.toggle_term_cmd "lazygit" end, desc = "ToggleTerm lazygit" }
-    end
-    if vim.fn.executable "node" == 1 then
-        maps.n["<leader>tn"] = { function() utils.toggle_term_cmd "node" end, desc = "ToggleTerm node" }
-    end
-    if vim.fn.executable "gdu" == 1 then
-        maps.n["<leader>tu"] = { function() utils.toggle_term_cmd "gdu" end, desc = "ToggleTerm gdu" }
-    end
-    if vim.fn.executable "btm" == 1 then
-        maps.n["<leader>tt"] = { function() utils.toggle_term_cmd "btm" end, desc = "ToggleTerm btm" }
-    end
-    local python = vim.fn.executable "python" == 1 and "python" or vim.fn.executable "python3" == 1 and "python3"
-    if python then maps.n["<leader>tp"] = { function() utils.toggle_term_cmd(python) end, desc = "ToggleTerm python" } end
-    maps.n["<leader>tf"] = { "<cmd>ToggleTerm direction=float<cr>", desc = "ToggleTerm float" }
-    maps.n["<leader>th"] = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "ToggleTerm horizontal split" }
-    maps.n["<leader>tv"] = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "ToggleTerm vertical split" }
-    maps.n["<F7>"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" }
-    maps.t["<F7>"] = maps.n["<F7>"]
-    maps.n["<C-'>"] = maps.n["<F7>"]
-    maps.t["<C-'>"] = maps.n["<F7>"]
-end
-
--- UFO - IMPROVED CODE FOLDING --
-if is_available "nvim-ufo" then
-    maps.n["zR"] = { function() require("ufo").openAllFolds() end, desc = "Open all folds" }
-    maps.n["zM"] = { function() require("ufo").closeAllFolds() end, desc = "Close all folds" }
-    maps.n["zr"] = { function() require("ufo").openFoldsExceptKinds() end, desc = "Fold less" }
-    maps.n["zm"] = { function() require("ufo").closeFoldsWith() end, desc = "Fold more" }
-    maps.n["zp"] = { function() require("ufo").peekFoldedLinesUnderCursor() end, desc = "Peek fold" }
 end
 
 utils.set_mappings(maps)
