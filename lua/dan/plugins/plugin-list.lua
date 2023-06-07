@@ -10,10 +10,10 @@ return {
         'mbbill/undotree',
         lazy = false,
     },
-    {
-        'tpope/vim-fugitive',
-        lazy = false,
-    },
+    -- {
+    --     'tpope/vim-fugitive',
+    --     lazy = false,
+    -- },
 
     -- Telescope
     {
@@ -26,7 +26,6 @@ return {
         },
         lazy = true,
     },
-    
     -- Treesitter
     {
         'nvim-treesitter/nvim-treesitter',
@@ -54,7 +53,6 @@ return {
             end,
             },
             {'williamboman/mason-lspconfig.nvim'}, -- Optional
-            'jose-elias-alvarez/null-ls.nvim',
             -- Autocompletion
             {'hrsh7th/nvim-cmp'},     -- Required
             {'hrsh7th/cmp-nvim-lsp'}, -- Required
