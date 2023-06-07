@@ -9,7 +9,7 @@ Personal Neovim configuration.
     - Automatic close of functions with `end` using [`nvim-treesitter-endwise`](https://github.com/RRethy/nvim-treesitter-endwise)
     - Automatic close of various tags using [`nvim-ts-autotag`](https://github.com/windwp/nvim-ts-autotag)
     - Rainbow parenthesis using [`nvim-t-s-rainbow`](https://github.com/p00f/nvim-ts-rainbow)
-- Fuzzy finding using [`telescope`](htts://github.com/nvim-telescope/telescope.nvim)
+- Fuzzy finding using [`telescope`](https://github.com/nvim-telescope/telescope.nvim)
 - Buffer changes record using [`undotree`](https://github.com/mbbill/undotree)
 - File marks for fast movement between files using [`harpoon`](https://github.com/ThePrimeagen/harpoon)
 - LSP using [`lsp-zero`](https://github.com/VonHeikemen/lsp-zeron.nvim)
