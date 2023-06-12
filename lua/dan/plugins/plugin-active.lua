@@ -12,6 +12,7 @@ local plugins = {
 
     -- LSP
     'lsp',
+    'julials',
 
     -- Editing
     'autopairs',
