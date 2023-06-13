@@ -103,7 +103,7 @@ end
 -- HARPOON --
 if is_available "harpoon" then
     local mark = require("harpoon.mark")
-    local ui = require("harpoon.ui") 
+    local ui = require("harpoon.ui")
 
     maps.n["<leader>ha"] = { mark.add_file, desc = "Harpoon - Add Mark" }
     maps.n["<leader>he"] = { ui.toggle_quick_menu, desc = "Harpoon - Quick Menu Toggle" }

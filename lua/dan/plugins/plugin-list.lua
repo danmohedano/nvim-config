@@ -56,6 +56,7 @@ return {
             -- Autocompletion
             {'hrsh7th/nvim-cmp'},     -- Required
             {'hrsh7th/cmp-nvim-lsp'}, -- Required
+            {'kdheepak/cmp-latex-symbols'},
             {'L3MON4D3/LuaSnip'},     -- Required
         }
     },
