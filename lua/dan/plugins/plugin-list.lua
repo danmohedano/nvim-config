@@ -58,6 +58,9 @@ return {
             {'hrsh7th/cmp-nvim-lsp'}, -- Required
             {'kdheepak/cmp-latex-symbols'},
             {'L3MON4D3/LuaSnip'},     -- Required
+            -- Linting and formatting additions
+            {'jose-elias-alvarez/null-ls.nvim'}, -- Optional
+            {'jay-babu/mason-null-ls.nvim'}, -- Optional
         }
     },
 
