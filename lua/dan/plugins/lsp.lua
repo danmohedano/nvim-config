@@ -71,36 +71,48 @@ vim.diagnostic.config({
     virtual_text = true
 })
 
+
+-- Julials
+require'lspconfig'.julials.setup{
+    on_new_config = function(new_config, _)
+        local julia = vim.fn.expand("~/.julia/environments/nvim-lspconfig/bin/julia")
+        if require'lspconfig'.util.path.is_file(julia) then
+	    vim.notify("Hello!")
+            new_config.cmd[1] = julia
+        end
+    end
+}
+
 -- null-ls --
-local null_status, null_ls = pcall(require, "null-ls")
-if not null_status then
-    return
-end
-
-local formatting = null_ls.builtins.formatting
-local diagnostics = null_ls.builtins.diagnostics
-
-null_ls.setup({
-    debug = false,
-    border = 'rounded',
-    log_level = 'error',
-    diagnostics_format = '#{c} #{m} (#{s})',
-    sources = {
-        formatting.rustfmt,                                   -- Rust
-        formatting.clang_format,                              -- C/C++
-        diagnostics.cpplint,                                  -- C/C++
-        diagnostics.cmake_lint,                               -- CMake
-        formatting.black.with({ extra_args = { '--fast' } }), -- Python
-        diagnostics.flake8,                                   -- Python
-        diagnostics.pydocstyle,                               -- Python
-        -- diagnostics.selene,                                   -- Lua
-        formatting.stylua,                                    -- Lua
-        formatting.prettier,                                  -- JS, CSS, HTML, JSON, YAML, MD
-    },
-})
-
--- mason-null-ls
-require("mason-null-ls").setup({
-    ensure_installed = nil,
-    automatic_installation = true, -- Automatically install configured sources
-})
+-- local null_status, null_ls = pcall(require, "null-ls")
+-- if not null_status then
+--     return
+-- end
+--
+-- local formatting = null_ls.builtins.formatting
+-- local diagnostics = null_ls.builtins.diagnostics
+--
+-- null_ls.setup({
+--     debug = false,
+--     border = 'rounded',
+--     log_level = 'error',
+--     diagnostics_format = '#{c} #{m} (#{s})',
+--     sources = {
+--         formatting.rustfmt,                                   -- Rust
+--         formatting.clang_format,                              -- C/C++
+--         diagnostics.cpplint,                                  -- C/C++
+--         diagnostics.cmake_lint,                               -- CMake
+--         formatting.black.with({ extra_args = { '--fast' } }), -- Python
+--         diagnostics.flake8,                                   -- Python
+--         diagnostics.pydocstyle,                               -- Python
+--         -- diagnostics.selene,                                   -- Lua
+--         formatting.stylua,                                    -- Lua
+--         formatting.prettier,                                  -- JS, CSS, HTML, JSON, YAML, MD
+--     },
+-- })
+--
+-- -- mason-null-ls
+-- require("mason-null-ls").setup({
+--     ensure_installed = nil,
+--     automatic_installation = true, -- Automatically install configured sources
+-- })
