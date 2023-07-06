@@ -49,9 +49,11 @@ local cmp = require('cmp')
 
 cmp.setup({
     mapping = {
-        ['<C-p>'] = cmp.mapping.select_next_item(),
-        ['<C-n>'] = cmp.mapping.select_prev_item(),
-        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-N>'] = cmp.mapping.select_next_item(),
+        ['<C-P>'] = cmp.mapping.select_prev_item(),
+        ['<TAB>'] = cmp.mapping.select_next_item(),
+        ['<S-TAB>'] = cmp.mapping.select_prev_item(),
+        ['<C-Y>'] = cmp.mapping.confirm({ select = true }),
         ['<C-Space>'] = cmp.mapping.complete(),
     }
 })
