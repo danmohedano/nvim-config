@@ -122,4 +122,9 @@ if is_available "mason.nvim" then
     maps.n["<leader>pM"] = { "<cmd>MasonUpdateAll<cr>", desc = "Mason Update" }
 end
 
+-- TROUBLE --
+if is_available "trouble.nvim" then
+    maps.n["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Trouble quickfix toggling" }
+end
+
 utils.set_mappings(maps)

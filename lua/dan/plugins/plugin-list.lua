@@ -33,8 +33,6 @@ return {
         dependencies = {
             'nvim-treesitter/nvim-treesitter-context', -- adds context to show in which block of code you are currently at
             'p00f/nvim-ts-rainbow', -- rainbow parenthesis
-            'windwp/nvim-ts-autotag', -- autoclose html tags
-            'RRethy/nvim-treesitter-endwise', -- automatically add end when necessary
         },
         lazy = true,
     },
@@ -47,24 +45,32 @@ return {
             -- LSP Support
             {'neovim/nvim-lspconfig'},             -- Required
             {                                      -- Optional
-            'williamboman/mason.nvim',
-            build = function()
-                pcall(vim.cmd, 'MasonUpdate')
-            end,
+                'williamboman/mason.nvim',
+                build = function()
+                    pcall(vim.cmd, 'MasonUpdate')
+                end,
             },
             {'williamboman/mason-lspconfig.nvim'}, -- Optional
+
             -- Autocompletion
             {'hrsh7th/nvim-cmp'},     -- Required
+            {'hrsh7th/cmp-buffer'},     -- Optional
+            {'hrsh7th/cmp-path'},     -- Optional
             {'hrsh7th/cmp-nvim-lsp'}, -- Required
+            {'hrsh7th/cmp-nvim-lua'},     -- Optional
             {'kdheepak/cmp-latex-symbols'},
+
+            -- Snippets
             {'L3MON4D3/LuaSnip'},     -- Required
+            {'rafamadriz/friendly-snippets'}, -- Optional
             -- Linting and formatting additions
-            {'jose-elias-alvarez/null-ls.nvim'}, -- Optional
-            {'jay-babu/mason-null-ls.nvim'}, -- Optional
+            -- {'jose-elias-alvarez/null-ls.nvim'}, -- Optional
+            -- {'jay-babu/mason-null-ls.nvim'}, -- Optional
         }
     },
 
     -- Editing
-    'windwp/nvim-autopairs',
     'numToStr/Comment.nvim',
+    'windwp/nvim-autopairs',
+    'folke/trouble.nvim',
 }

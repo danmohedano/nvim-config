@@ -1,22 +1,20 @@
--- List of active plugins being used
+-- List of active plugins being used which need extra configuration files
 local plugins = {
     -- Plugin Manager
     'lazy',
 
     -- Utilities
-    'harpoon',
     'nvim-tree',
     'telescope',
-    'treesitter-context',
     'treesitter',
 
     -- LSP
     'lsp',
-    'julials',
 
     -- Editing
     'autopairs',
     'comment',
+    'trouble',
 
     -- Appearance
     'kanagawa',
