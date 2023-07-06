@@ -34,22 +34,12 @@ require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = {
         "clangd", -- C/C++ - LSP
-        -- "clang-format", -- C/C++ - Formatter
-        -- "cpplint", -- C/C++ - Linter
         "cmake",         -- CMake -- LSP
-        -- "cmakelint", -- CMake - Linter
         "rust_analyzer", -- Rust - LSP
-        -- "rustfmt", -- Rust - Formatter
         "pyright",       -- Python - LSP
-        -- "black", -- Python - Formatter
-        -- "flake8", -- Python - Linter
-        -- "pydocstyle", -- Python - Linter
         "julials", -- Julia - LSP
         "fortls",  -- Fortran - LSP
         "lua_ls",  -- Lua - LSP
-        -- "selene", -- Lua - Linter
-        -- "stylua", -- Lua - Formatter
-        -- "prettier", -- JS, CSS, HTML, JSON, YAML, MD - Formatter
     },
     automatic_installation = true,
 })
