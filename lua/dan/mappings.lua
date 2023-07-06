@@ -22,14 +22,6 @@ maps.n["j"] = { "v:count ? 'j' : 'gj'", expr = true, desc = "Move cursor down" }
 maps.n["k"] = { "v:count ? 'k' : 'gk'", expr = true, desc = "Move cursor up" }
 maps.v["j"] = maps.n.j
 maps.v["k"] = maps.n.k
--- maps.n["<C-h>"] = { "<C-w>h", desc = "Focus Left Window" }
--- maps.n["<C-l>"] = { "<C-w>l", desc = "Focus Right Window" }
--- maps.n["<C-j>"] = { "<C-w>j", desc = "Focus Down Window" }
--- maps.n["<C-k>"] = { "<C-w>k", desc = "Focus Up Window" }
--- maps.n["<C-H>"] = { "<C-w>H", desc = "Move to Left Window" }
--- maps.n["<C-L>"] = { "<C-w>L", desc = "Move to Right Window" }
--- maps.n["<C-J>"] = { "<C-w>J", desc = "Move to Down Window" }
--- maps.n["<C-K>"] = { "<C-w>K", desc = "Move to Up Window" }
 maps.n["J"] = { "mzJ`z", desc = "Append following line to current" }
 maps.n["n"] = { "nzzzv", desc = "Keep cursor in middle when searching" }
 maps.n["N"] = { "Nzzzv", desc = "Keep cursor in middle when searching" }
@@ -49,26 +41,26 @@ maps.n["|"] = { "<cmd>vsplit<cr>", desc = "Vertical Split" }
 maps.n["\\"] = { "<cmd>split<cr>", desc = "Horizontal Split" }
 
 -- RESIZING BINDINGS --
-maps.n["<C-Plus>"] = { "<cmd>resize -1<CR>"}
-maps.n["<C-Minus>"] = { "<cmd>resize +1<CR>"}
-maps.n["<C-Left>"] = { "<cmd>vertical resize -5<CR>"}
-maps.n["<C-Right>"] = { "<cmd>vertical resize +5<CR>"}
-maps.n["<C-Up>"] = { "<cmd>horizontal resize +5<CR>"}
-maps.n["<C-Down>"] = { "<cmd>horizontal resize -5<CR>"}
+maps.n["<C-Plus>"] = { "<cmd>resize -1<CR>", desc = "Increase font size" }
+maps.n["<C-Minus>"] = { "<cmd>resize +1<CR>", desc = "Decrease font size" }
+maps.n["<C-Left>"] = { "<cmd>vertical resize -5<CR>", desc = "Decrease horizontal size" }
+maps.n["<C-Right>"] = { "<cmd>vertical resize +5<CR>", desc = "Increase horizontal size" }
+maps.n["<C-Up>"] = { "<cmd>horizontal resize +5<CR>", desc = "Increase vertical size" }
+maps.n["<C-Down>"] = { "<cmd>horizontal resize -5<CR>", desc = "Decrease vertical size" }
 
 -- SELECTION BINDINGS --
-maps.v["J"] = { "<cmd>m '>+1<CR>gv=gv" }
-maps.v["K"] = { "<cmd>m '<-2<CR>gv=gv" }
+maps.v["J"] = { "<cmd>m '>+1<CR>gv=gv", desc = "Shift line down in visual mode" }
+maps.v["K"] = { "<cmd>m '<-2<CR>gv=gv", desc = "Shift line up in visual mode" }
 -- Stay in indent mode
-maps.v["<S-Tab>"] = { "<gv", desc = "unindent line" }
-maps.v["<Tab>"] = { ">gv", desc = "indent line" }
-maps.v["<"] = { "<gv", desc = "unindent line" }
-maps.v[">"] = { ">gv", desc = "indent line" }
+maps.v["<S-Tab>"] = { "<gv", desc = "Unindent line" }
+maps.v["<Tab>"] = { ">gv", desc = "Indent line" }
+maps.v["<"] = { "<gv", desc = "Unindent line" }
+maps.v[">"] = { ">gv", desc = "Indent line" }
 
 -- COPY/PASTE BINDINGS --
 maps.x["p"] =  { "\"_dP" } -- Hold onto yanked content when pasting in visual mode
-maps.n["<leader>d"] = { "\"_d" }
-maps.v["<leader>d"] = { "\"_d" }
+maps.n["<leader>d"] = { "\"_d", desc = "Delete content without saving deleted content to pastebin" }
+maps.v["<leader>d"] = { "\"_d", desc = "Delete content without saving deleted content to pastebin" }
 
 --=================--
 -- PLUGIN BINDINGS --
