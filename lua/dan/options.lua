@@ -13,15 +13,12 @@ local options = {
         expandtab = true, -- convert tabs to spaces
         fileencoding = "utf-8", -- the encoding written to a file
         fillchars = { eob = " " }, -- disable `~` on noexistent lines
-        foldenable = true, -- enable fold for nvim-ufo
-        foldlevel = 99, -- set high foldlevel for nvim-ufo
-        foldlevelstart = 99, -- start with all code unfolded
         foldcolumn = vim.fn.has "nvim-0.9" == 1 and "1" or nil, -- show foldcolumn in nvim 0.9
         history = 100, -- number of commands to remember in a history table
         hlsearch = false, -- highlight all matches on previous search pattern
         incsearch = true, -- show the search pattern if found as it is being typed 
-        ignorecase = true, -- ignore case in search patterns
-        infercase = true, -- infer cases in keyword completion
+        ignorecase = false, -- ignore case in search patterns
+        infercase = false, -- infer cases in keyword completion
         laststatus = 3, -- globalstatus
         linebreak = true, -- wrap lines at 'breakat'
         mouse = "a", -- allow the mouse to be used in neovim
