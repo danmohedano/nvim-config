@@ -124,7 +124,7 @@ end
 
 -- TROUBLE --
 if is_available "trouble.nvim" then
-    maps.n["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Trouble quickfix toggling" }
+    maps.n["<leader>xq"] = { "<cmd>TroubleToggle<cr>", desc = "Trouble toggling" }
 end
 
 utils.set_mappings(maps)
