@@ -1,8 +1,12 @@
-local status_ok, trouble = pcall(require, 'trouble')
-if not status_ok then
-    return
+local M = {
+    "folke/trouble.nvim",
+}
+
+function M.config()
+    local trouble = require("trouble")
+    trouble.setup({
+        icons = false,
+    })
 end
 
-trouble.setup({
-    icons=false,
-})
+return M
