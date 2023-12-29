@@ -1,26 +1,24 @@
 # nvim-config
-Personal Neovim configuration.
 
-### Features
+Personal Neovim configuration. 
+
+This branch contains a modification of my original config aimed at being as minimal as possible to reduce clutter both on execution and in the configuration.
+
+## Features
+
 - Plugin management using [`lazy`](https://github.com/folke/lazy.nvim)
-- Cwd tree using [`nvim-tree`](https://github.com/nvim-tree/nvim-tree.lua) 
 - Syntax highlighting using [`treesitter`](https://github.com/nvim-treesitter/nvim-treesitter)
-    - Added context of current code block using [`treesitter-context`](https://github.com/nvim-treesitter/nvim-treesitter-context)
-    - Rainbow parenthesis using [`nvim-t-s-rainbow`](https://github.com/p00f/nvim-ts-rainbow)
 - Fuzzy finding using [`telescope`](https://github.com/nvim-telescope/telescope.nvim)
 - Buffer changes record using [`undotree`](https://github.com/mbbill/undotree)
 - File marks for fast movement between files using [`harpoon`](https://github.com/ThePrimeagen/harpoon)
-- LSP using [`lsp-zero`](https://github.com/VonHeikemen/lsp-zeron.nvim)
-- Autoparing using [`nvim-autopairs`](https://github.com/windwp/nvim-autopairs)
-- Commenting utilities using [`Comment`](https://github.com/numToStr/Comment.nvim)
+- LSP using [`lsp-zero`](https://github.com/VonHeikemen/lsp-zeron.nvim) and [`mason`](https://github.com/williamboman/mason.nvim)
+- Git wrapping using [`fugitive`](https://github.com/tpope/vim-fugitive)
+- Diagnostics summary using [`trouble`](https://github.com/folke/trouble.nvim)
+- Status line using [`lualine`](https://github.com/nvim-lualine/lualine.nvim)
 
+## Structure
 
-### Structure
-- `lua/dan/mappings.lua`: Contains most of the key bindings for the configuration. Some of them are also in the specific plugin configuration they belong.
-- `lua/dan/options.lua`: Contains all the vim options being set
-- `lua/dan/icons.lua`: Contains a variety of icons that can be used in other configurations
-- `lua/dan/plugins/`: Contains all the plugin configurations.
-    - `lua/dan/plugins/plugin-list.lua`: Contains a list of all plugins that will be installed by `lazy`
-    - `lua/dan/plugins/plugin-active.lua`: Contains all the active plugins in the configuration (responsible for calling the `setup` function of each module). Most of the plugins don't require a manual call to `setup()` function, so they don't have a specific file.
-
-
+- `lua/dan/mappings.lua`: keybindings
+- `lua/dan/options.lua`: vim options
+- `lua/dan/utils/`: some utils used by the configuration
+- `lua/dan/plugins/`: plugin configuration

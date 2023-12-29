@@ -1,21 +1,7 @@
-local utils = require "dan.utils"
+local utils = require("dan.utils")
 local is_available = utils.is_available
 
-local maps = { i = {}, n = {}, v = {}, t = {}, x = {}}
-
-local sections = {
-    f = { name = "󰍉 Find" },
-    p = { name = "󰏖 Packages" },
-    l = { name = " LSP" },
-    u = { name = " UI" },
-    b = { name = "󰓩 Buffers" },
-    d = { name = " Debugger" },
-    g = { name = " Git" },
-    S = { name = "󱂬 Session" },
-    t = { name = " Terminal" },
-}
-
-if not vim.g.icons_enabled then vim.tbl_map(function(opts) opts.name = opts.name:gsub("^.* ", "") end, sections) end
+local maps = { i = {}, n = {}, v = {}, t = {}, x = {} }
 
 -- MOVEMENT BINDINGS --
 maps.n["j"] = { "v:count ? 'j' : 'gj'", expr = true, desc = "Move cursor down" }
@@ -30,6 +16,7 @@ maps.n["N"] = { "Nzzzv", desc = "Keep cursor in middle when searching" }
 maps.i["kj"] = { "<Esc>" }
 
 -- LEADER BINDINGS --
+maps.n["<leader>pv"] = { "<cmd>Ex<cr>", desc = "Project view with netrw" }
 maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save" }
 maps.n["<leader>q"] = { "<cmd>confirm q<cr>", desc = "Quit" }
 maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" }
@@ -58,28 +45,13 @@ maps.v["<"] = { "<gv", desc = "Unindent line" }
 maps.v[">"] = { ">gv", desc = "Indent line" }
 
 -- COPY/PASTE BINDINGS --
-maps.x["p"] =  { "\"_dP" } -- Hold onto yanked content when pasting in visual mode
+maps.x["p"] = { "\"_dP" } -- Hold onto yanked content when pasting in visual mode
 maps.n["<leader>d"] = { "\"_d", desc = "Delete content without saving deleted content to pastebin" }
 maps.v["<leader>d"] = { "\"_d", desc = "Delete content without saving deleted content to pastebin" }
 
---=================--
--- PLUGIN BINDINGS --
---=================--
--- NVIMTREE --
-if is_available "nvim-tree.lua" then
-    maps.n["<leader>e"] = { "<cmd>NvimTreeToggle<cr>", desc = "Toggle Explorer" }
-    maps.n["<leader>o"] = { "<cmd>NvimTreeFocus<cr>", desc = "Toggle Explorer Focus" }
-end
-
--- COMMENT --
-if is_available "Comment.nvim" then
-    maps.n["<leader>/"] = {
-        function() require("Comment.api").toggle.linewise.count(vim.v.count > 0 and vim.v.count or 1) end,
-        desc = "Comment line",
-    }
-    maps.v["<leader>/"] =
-        { "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", desc = "Toggle comment line" }
-end
+--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--
+--          PLUGIN BINDINGS         --
+--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--
 
 -- TELESCOPE --
 if is_available "telescope.nvim" then
@@ -87,9 +59,13 @@ if is_available "telescope.nvim" then
 
     maps.n["<leader>ff"] = { builtin.find_files, desc = "Telescope - Find files" }
     maps.n["<leader>fg"] = { builtin.git_files, desc = "Telescope - Find Git Files" }
-    maps.n["<leader>fs"] = { function()
-        builtin.grep_string({ search = vim.fn.input("Grep > ") })
-    end, desc = "Telescope - Find String in Files" }
+    maps.n["<leader>fs"] = {
+        function()
+            builtin.grep_string({ search = vim.fn.input("Grep > ") })
+        end,
+        desc = "Telescope - Find String in Files"
+    }
+    maps.n["<leader>fh"] = { builtin.help_tags, desc = "Telescope - Help tags" }
 end
 
 -- HARPOON --
@@ -115,16 +91,32 @@ if is_available "vim-fugitive" then
     maps.n["<leader>gs"] = { vim.cmd.Git, desc = "VimFugitive - Git" }
 end
 
-
 -- MASON PACKAGE MANAGER --
 if is_available "mason.nvim" then
     maps.n["<leader>pm"] = { "<cmd>Mason<cr>", desc = "Mason Installer" }
     maps.n["<leader>pM"] = { "<cmd>MasonUpdateAll<cr>", desc = "Mason Update" }
 end
 
+-- LSP BINDINGS --
+maps.n["K"] = { vim.lsp.buf.hover, desc = "LSP - Hover" }
+maps.n["gd"] = { vim.lsp.buf.definition, desc = "LSP - Definition" }
+maps.n["gD"] = { vim.lsp.buf.declaration, desc = "LSP - Declaration" }
+maps.n["gi"] = { vim.lsp.buf.implementation, desc = "LSP - Implementation" }
+maps.n["go"] = { vim.lsp.buf.type_definition, desc = "LSP - Type Definition" }
+maps.n["gr"] = { vim.lsp.buf.references, desc = "LSP - References" }
+maps.n["gs"] = { vim.lsp.buf.signature_help, desc = "LSP - Signature Help" }
+maps.n["<F2>"] = { vim.lsp.buf.rename, desc = "LSP - Rename" }
+maps.n["<F3>"] = { function() vim.lsp.buf.format({ async = true }) end, desc = "LSP - Format" }
+maps.v["<F3>"] = maps.n["<F3>"]
+maps.n["<F4>"] = { vim.lsp.buf.code_action, desc = "LSP - Code Action" }
+
+maps.n["gl"] = { vim.diagnostic.open_float, desc = "LSP - Open float" }
+
 -- TROUBLE --
 if is_available "trouble.nvim" then
-    maps.n["<leader>xq"] = { "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Trouble toggling document_diagnostics" }
+    local trouble = require("trouble")
+    maps.n["<leader>xd"] = { function() trouble.toggle("document_diagnostics") end, desc = "Trouble Doc Diagnostics" }
+    maps.n["<leader>xq"] = { function() trouble.toggle("quickfix") end, desc = "Trouble Quickfix" }
 end
 
 utils.set_mappings(maps)
